@@ -1,5 +1,9 @@
 package com.flasblog.back.mapper;
 
+import com.flasblog.back.model.CommentaryModel;
+import com.flasblog.back.model.PostModel;
+import com.flasblog.back.model.SecurityUserModel;
+import com.flasblog.back.model.UserModel;
 import com.flasblog.back.persistence.entity.CommentaryEntity;
 import com.flasblog.back.persistence.entity.PostEntity;
 import com.flasblog.back.persistence.entity.UserEntity;
@@ -11,10 +15,6 @@ import com.flasblog.back.web.dto.PostRequestDto;
 import com.flasblog.back.web.dto.PostResponseDto;
 import com.flasblog.back.web.dto.UserDataRequestDto;
 import com.flasblog.back.web.dto.UserResponseDto;
-import com.flasblog.back.model.CommentaryModel;
-import com.flasblog.back.model.PostModel;
-import com.flasblog.back.model.SecurityUserModel;
-import com.flasblog.back.model.UserModel;
 import java.util.List;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Builder;
@@ -70,8 +70,7 @@ public interface Mapper {
    * @return UserEntity.
    */
   @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-  UserEntity updateUserEntityFromModel(
-      UserModel userModel, @MappingTarget UserEntity userEntity);
+  UserEntity updateUserEntityFromModel(UserModel userModel, @MappingTarget UserEntity userEntity);
 
   /**
    * PostEntity to PostModel.
@@ -111,8 +110,7 @@ public interface Mapper {
    * @param commentaryEntityEntities List of CommentaryEntity.
    * @return List of Commentary.
    */
-  List<CommentaryModel> commentaryEntitiesToModels(
-      List<CommentaryEntity> commentaryEntityEntities);
+  List<CommentaryModel> commentaryEntitiesToModels(List<CommentaryEntity> commentaryEntityEntities);
 
   /**
    * UserDataRequestDto to UserModel mapper.

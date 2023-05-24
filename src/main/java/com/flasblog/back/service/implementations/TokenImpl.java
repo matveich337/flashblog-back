@@ -1,5 +1,7 @@
 package com.flasblog.back.service.implementations;
 
+import com.flasblog.back.exceptions.exceptions.TokenException;
+import com.flasblog.back.model.JwtTypeModel;
 import com.flasblog.back.service.interfaces.TokenInterface;
 import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JOSEException;
@@ -17,8 +19,6 @@ import com.nimbusds.jose.proc.SimpleSecurityContext;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
-import com.flasblog.back.exceptions.exceptions.TokenException;
-import com.flasblog.back.model.JwtTypeModel;
 import jakarta.annotation.PostConstruct;
 import java.text.ParseException;
 import java.util.Date;
@@ -89,12 +89,16 @@ public class TokenImpl implements TokenInterface {
 
   @Override
   public Boolean isEmailActivationToken(String jwt) {
-    return getJwtClaimsSetFromToken(jwt).getClaim("type").equals(JwtTypeModel.EMAIL_ACTIVATION.name());
+    return getJwtClaimsSetFromToken(jwt)
+        .getClaim("type")
+        .equals(JwtTypeModel.EMAIL_ACTIVATION.name());
   }
 
   @Override
   public Boolean isPasswordForgottenToken(String jwt) {
-    return getJwtClaimsSetFromToken(jwt).getClaim("type").equals(JwtTypeModel.PASSWORD_FORGOT.name());
+    return getJwtClaimsSetFromToken(jwt)
+        .getClaim("type")
+        .equals(JwtTypeModel.PASSWORD_FORGOT.name());
   }
 
   private JWTClaimsSet getJwtClaimsSetFromToken(String jwt) {

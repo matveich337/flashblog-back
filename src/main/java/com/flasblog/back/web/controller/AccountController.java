@@ -1,18 +1,18 @@
 package com.flasblog.back.web.controller;
 
+import com.flasblog.back.exceptions.exceptions.TokenException;
+import com.flasblog.back.mapper.Mapper;
+import com.flasblog.back.model.JwtTypeModel;
 import com.flasblog.back.model.UserModel;
+import com.flasblog.back.service.interfaces.EmailInterface;
+import com.flasblog.back.service.interfaces.TokenInterface;
+import com.flasblog.back.service.interfaces.UserInterface;
 import com.flasblog.back.web.dto.AccountChangePasswordRequestDto;
 import com.flasblog.back.web.dto.AccountCredentialsRequestDto;
 import com.flasblog.back.web.dto.AccountEmailRequestDto;
 import com.flasblog.back.web.dto.AccountLoginRequestDto;
 import com.flasblog.back.web.dto.AuthorizationTokenResponseDto;
 import com.flasblog.back.web.dto.UserResponseDto;
-import com.flasblog.back.exceptions.exceptions.TokenException;
-import com.flasblog.back.mapper.Mapper;
-import com.flasblog.back.model.JwtTypeModel;
-import com.flasblog.back.service.interfaces.EmailInterface;
-import com.flasblog.back.service.interfaces.TokenInterface;
-import com.flasblog.back.service.interfaces.UserInterface;
 import jakarta.validation.Valid;
 import java.util.Map;
 import lombok.AllArgsConstructor;
@@ -44,14 +44,13 @@ public class AccountController {
       @RequestBody @Valid AccountCredentialsRequestDto requestDto) {
     if (requestDto.getEmail().equals("test@test")) {
       return ResponseEntity.status(HttpStatus.CREATED)
-          .body(
-              Mapper.I.userModelToResponseDto(
-                  UserModel.builder().email("test@test").build()));
+          .body(Mapper.I.userModelToResponseDto(UserModel.builder().email("test@test").build()));
     }
     UserModel userModel =
         userInterface.registerUser(Mapper.I.accountCredentialsRequestDtoToUser(requestDto));
     emailInterface.sendAccountActivationLink(userModel);
-    return ResponseEntity.status(HttpStatus.CREATED).body(Mapper.I.userModelToResponseDto(userModel));
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body(Mapper.I.userModelToResponseDto(userModel));
   }
 
   /**

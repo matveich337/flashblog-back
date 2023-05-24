@@ -1,12 +1,12 @@
 package com.flasblog.back.web.controller;
 
+import com.flasblog.back.mapper.Mapper;
+import com.flasblog.back.service.interfaces.PostInterface;
 import com.flasblog.back.web.dto.CommentaryRequestDto;
 import com.flasblog.back.web.dto.CommentaryResponseDto;
 import com.flasblog.back.web.dto.PostRequestDto;
 import com.flasblog.back.web.dto.PostResponseDto;
 import com.flasblog.back.web.dto.UserPostsResponseDto;
-import com.flasblog.back.mapper.Mapper;
-import com.flasblog.back.service.interfaces.PostInterface;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +38,8 @@ public class PostController {
   }
 
   @GetMapping("/{postId}")
-  public ResponseEntity<PostResponseDto> getPostById(@PathVariable(value = "postId") String postId) {
+  public ResponseEntity<PostResponseDto> getPostById(
+      @PathVariable(value = "postId") String postId) {
     return ResponseEntity.ok(Mapper.I.postModelToResponseDto(postInterface.getPostById(postId)));
   }
 
@@ -49,7 +50,8 @@ public class PostController {
    * @return PostResponse.
    */
   @PostMapping
-  public ResponseEntity<PostResponseDto> createNewPost(@Valid @RequestBody PostRequestDto requestDto) {
+  public ResponseEntity<PostResponseDto> createNewPost(
+      @Valid @RequestBody PostRequestDto requestDto) {
     return ResponseEntity.ok(
         Mapper.I.postModelToResponseDto(
             postInterface.createPost(Mapper.I.postRequestDtoToModel(requestDto))));

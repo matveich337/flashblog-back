@@ -59,14 +59,16 @@ public class TokenFilterConfig extends OncePerRequestFilter {
    */
   private void getAndAuthenticateUserFromJwt(String jwt) {
     try {
-      SecurityUserModel securityUserModel = userInterface.getUserByEmail(tokenInterface.getEmailFromJwt(jwt));
+      SecurityUserModel securityUserModel =
+          userInterface.getUserByEmail(tokenInterface.getEmailFromJwt(jwt));
 
       if (!securityUserModel.isEnabled()) {
         throw new UserException(
             Map.of("email", "Please activate your account"), "User not activated");
       }
       UsernamePasswordAuthenticationToken auth =
-          new UsernamePasswordAuthenticationToken(securityUserModel, "", securityUserModel.getAuthorities());
+          new UsernamePasswordAuthenticationToken(
+              securityUserModel, "", securityUserModel.getAuthorities());
 
       SecurityContextHolder.getContext().setAuthentication(auth);
     } catch (CredentialsException e) {

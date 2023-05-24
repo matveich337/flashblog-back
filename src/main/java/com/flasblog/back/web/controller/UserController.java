@@ -1,13 +1,13 @@
 package com.flasblog.back.web.controller;
 
-import com.flasblog.back.web.dto.AccountChangePasswordRequestDto;
-import com.flasblog.back.web.dto.AuthorizationTokenResponseDto;
-import com.flasblog.back.web.dto.UserDataRequestDto;
-import com.flasblog.back.web.dto.UserResponseDto;
 import com.flasblog.back.mapper.Mapper;
 import com.flasblog.back.model.JwtTypeModel;
 import com.flasblog.back.service.interfaces.TokenInterface;
 import com.flasblog.back.service.interfaces.UserInterface;
+import com.flasblog.back.web.dto.AccountChangePasswordRequestDto;
+import com.flasblog.back.web.dto.AuthorizationTokenResponseDto;
+import com.flasblog.back.web.dto.UserDataRequestDto;
+import com.flasblog.back.web.dto.UserResponseDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
