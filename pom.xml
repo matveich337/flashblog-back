@@ -10,6 +10,7 @@
   <packaging>jar</packaging>
 
   <properties>
+    <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
     <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
     <org.projectlombok.version>1.18.24</org.projectlombok.version>
     <org.commons-io.version>2.11.0</org.commons-io.version>
@@ -122,6 +123,7 @@
       <version>${org.mockito-inline.version}</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
   <build>
@@ -145,6 +147,10 @@
             </exclude>
           </excludes>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
       </plugin>
     </plugins>
   </build>
