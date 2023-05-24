@@ -33,6 +33,6 @@ jobs:
 workflows:
   sample:
     jobs:
-      - build-and-test-and-spot-bugs
+      - build-and-test
       - checkstyle
       - spotbugs
